@@ -1934,6 +1934,7 @@ app.post('/api/v1/jobs', (req, res) => {
   const id = nanoid(10);
   // console.log(id);
   const job = { id, company, position };
+  console.log(job);
   jobs.push(job);
   res.status(200).json({ job });
 });
