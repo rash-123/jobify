@@ -4,7 +4,7 @@ const JobInfo = ({icon, text}) => {
     return (
         <Wrapper>
             <span className="job-icon">{icon}</span>
-            <span
+            <span className="job-text">{text}</span>
         </Wrapper>
     );
 };

@@ -10,14 +10,19 @@ import {
     Stats,
     AllJobs,
     Profile,
-    Admin
+    Admin,
+    EditJob,
 } from "./pages";
 
-import { action as registerAction } from './pages/Register';
+import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
-import { loader as dashboardLoader } from './pages/DashboardLayout';
+import { loader as dashboardLoader } from "./pages/DashboardLayout";
 import { action as addJobAction } from "./pages/AddJob";
 import { loader as allJobAction } from "./pages/AllJobs";
+import { loader as editJobLoader } from "./pages/EditJob";
+import { action as editJobAction } from "./pages/EditJob";
+import { action as deleteJobAction } from "./pages/DeleteJob";
+import { loader as adminJobLoader } from "./pages/Admin";
 
 export const checkDefaultTheme = () => {
     const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -59,7 +64,7 @@ const route = createBrowserRouter([
                     },
                     {
                         path: "stats",
-                        element:<Stats/>
+                        element: <Stats />,
                     },
                     {
                         path: "all-jobs",
@@ -68,13 +73,24 @@ const route = createBrowserRouter([
                     },
                     {
                         path: "profile",
-                        element: <Profile/>
+                        element: <Profile />,
                     },
                     {
                         path: "admin",
-                        element: <Admin />
+                        element: <Admin />,
+                        loader: adminJobLoader,
+                    },
+                    {
+                        path: "edit-job/:id",
+                        element: <EditJob />,
+                        loader: editJobLoader,
+                        action: editJobAction,
+                    },
+                    {
+                        path: "delete-job/:id",
+                        action: deleteJobAction,
                     }
-                ]
+                ],
             },
         ],
     },
