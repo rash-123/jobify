@@ -6,8 +6,10 @@ export default defineConfig({
     plugins: [react()],
     build: {
         rollupOptions: {
-            treeshake: {
-                allowUnused: true,
+            // Configure manualChunks to allow unused code
+            manualChunks(id) {
+                // Mark all modules as potential chunks
+                return "chunk";
             },
         },
     },
