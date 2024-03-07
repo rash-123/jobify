@@ -12,6 +12,9 @@ import cookieParse from "cookie-parser";
 
 import cloudinary from "cloudinary";
 
+import helmet from 'helmet';
+import mongSanitizae from 'express-mongo-sanitize';
+
 //routes
 import jobRouter from "./routes/jobRouter.js";
 import authRouter from './routes/authRouter.js';
@@ -43,7 +46,8 @@ app.use(express.static(path.resolve(__dirname, './client/dist')));
 
 app.use(cookieParse());
 app.use(express.json());
-app.use(morgan("dev"));
+app.use(helmet());
+app.use(mongSanitizae());
 
 // app.post(
 //     "/api/v1/test",

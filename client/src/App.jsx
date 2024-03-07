@@ -21,7 +21,7 @@ import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
 import { loader as dashboardLoader } from "./pages/DashboardLayout";
 import { action as addJobAction } from "./pages/AddJob";
-import { loader as allJobAction } from "./pages/AllJobs";
+import { loader as allJobLoader } from "./pages/AllJobs";
 import { loader as editJobLoader } from "./pages/EditJob";
 import { action as editJobAction } from "./pages/EditJob";
 import { action as deleteJobAction } from "./pages/DeleteJob";
@@ -64,33 +64,34 @@ const router = createBrowserRouter([
             {
                 path: "login",
                 element: <Login />,
-                action: loginAction,
+                action: loginAction(queryClient),
             },
             {
                 path: "dashboard",
-                element: <DashboardLayout />,
-                loader: dashboardLoader,
+                element: <DashboardLayout isDarkThemeEnabled={isDarkThemeEnabled} queryClient={queryClient} />,
+                loader: dashboardLoader(queryClient),
                 children: [
                     {
                         index: true,
                         element: <AddJob />,
-                        action: addJobAction,
+                        action: addJobAction(queryClient),
                     },
                     {
                         path: "stats",
                         element: <Stats />,
-                        loader: statsLoader,
+                        loader: statsLoader(queryClient),
                         errorElement: <ErrorElement/>
                     },
                     {
                         path: "all-jobs",
                         element: <AllJobs />,
-                        loader: allJobAction,
+                        loader: allJobLoader(queryClient),
+                        errorElement: <ErrorElement />,
                     },
                     {
                         path: "profile",
                         element: <Profile />,
-                        action: profileAction,
+                        action: profileAction(queryClient),
                     },
                     {
                         path: "admin",
@@ -100,12 +101,12 @@ const router = createBrowserRouter([
                     {
                         path: "edit-job/:id",
                         element: <EditJob />,
-                        loader: editJobLoader,
-                        action: editJobAction,
+                        loader: editJobLoader(queryClient),
+                        action: editJobAction(queryClient),
                     },
                     {
                         path: "delete-job/:id",
-                        action: deleteJobAction,
+                        action: deleteJobAction(queryClient),
                     },
                 ],
             },
